@@ -1,7 +1,14 @@
 SampleApp::Application.routes.draw do
-  get "users/new"
+  resources :users #user folder 
+  resources :sessions, :only => [:new, :create, :destroy] # session folder
 
-  match '/signup',  :to => 'users#new'
+  match '/signup',  :to => 'users#new'#if match, go the folder and file
+  match '/signin',  :to => 'sessions#new'
+  match '/signout', :to => 'sessions#destroy'
+
+  get "sessions/new" # go to session folder new file
+
+  get "users/new"
 
   match '/contact', :to => 'pages#contact'
   match '/about',   :to => 'pages#about'
@@ -14,7 +21,6 @@ SampleApp::Application.routes.draw do
   get "pages/about"
 
   resources :microposts
-  resources :users
 
 
   # The priority is based upon order of creation:
