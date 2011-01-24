@@ -11,6 +11,7 @@ SampleApp::Application.routes.draw do
   end
   resources :sessions, :only => [:new, :create, :destroy] # session folder
   resources :microposts, :only => [:create, :destroy] #micropost
+  resources :relationships, :only => [:create, :destroy]
 
   match '/signup',  :to => 'users#new'#if match, go the folder and file
   match '/signin',  :to => 'sessions#new'
