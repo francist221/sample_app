@@ -1,5 +1,14 @@
 SampleApp::Application.routes.draw do
-  resources :users #user folder 
+  resources :users do #User Folder
+    member do # like /users/1/following and /users/1/followers
+      get :following, :followers
+    end
+   # collection do # /users/followers and /users/following
+   #   get :following, :followers
+   # end
+
+
+  end
   resources :sessions, :only => [:new, :create, :destroy] # session folder
   resources :microposts, :only => [:create, :destroy] #micropost
 
