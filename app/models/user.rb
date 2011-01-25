@@ -69,8 +69,8 @@ class User < ActiveRecord::Base
   end
 
   def feed
-    # This is preliminary. See Chapter 12 for the full implementation.
-    Micropost.where("user_id = ?", id) #The question mark ensures that id is properly escaped before being included in the underlying SQL query, thereby avoiding a serious security hole called SQL injection. (The id attribute here is just an integer, so there is no danger in this case, but always escaping variables injected into SQL statements is a good habit to cultivate.)
+    # Micropost.where("user_id = ?", id) #The question mark ensures that id is properly escaped before being included in the underlying SQL query, thereby avoiding a serious security hole called SQL injection. (The id attribute here is just an integer, so there is no danger in this case, but always escaping variables injected into SQL statements is a good habit to cultivate.)
+    Micropost.from_users_followed_by(self) # SELECT * FROM microposts WHERE user_id IN (<list of ids>) OR user_id = <user id>
   end
 
   private
